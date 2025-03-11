@@ -33,7 +33,7 @@ const Services: React.FC = () => {
             <h2 className="section-title before:content-services relative before:absolute before:opacity-40 before:-top-[2rem] before:-left-28 before:hidden before:lg:block">
               What I do for clients
             </h2>
-            <p className="subtitle">
+            <p className="subtitle text-center">
               Here's something to offer my prospective clients
             </p>
           </div>

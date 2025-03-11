@@ -9,11 +9,12 @@ interface BrandItem {
 }
 
 const brands: BrandItem[] = [
-    { img: "/assets/img/brands/freelancer.png", href: "" },
-    { img: "/assets/img/brands/upwork.png", href: "" },
-    { img: "/assets/img/brands/fiverr.png", href: "" },
-    { img: "/assets/img/brands/behance.png", href: "" },
-    { img: "/assets/img/brands/dribbble.png", href: "" },
+    { img: "/assets/img/skills/psql.png", href: "" },
+    { img: "/assets/img/skills/laravel.png", href: "" },
+    { img: "/assets/img/skills/nodejs.png", href: "" },
+    { img: "/assets/img/skills/golang.png", href: "" },
+    { img: "/assets/img/skills/figma.png", href: "" },
+    { img: "/assets/img/skills/redis.png", href: "" },
   ];
 
 const Brand: React.FC = () => {
@@ -25,8 +26,8 @@ const Brand: React.FC = () => {
             <Image
               src={brand.img}
               alt=""
-              width={150}
-              height={50}
+              width={100}
+              height={100}
             />
           </div>
         ))}

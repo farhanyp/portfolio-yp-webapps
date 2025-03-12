@@ -6,13 +6,9 @@ import { motion, Variants } from "framer-motion";
 import { Link } from "react-scroll";
 
 const navigation = [
-    { name: "home", href: "home" },
-    { name: "about", href: "about" },
-    { name: "portfolio", href: "portfolio" },
-    { name: "services", href: "services" },
-    { name: "testimonials", href: "testimonials" },
-    { name: "contact", href: "contact" },
-  ];
+  { name: "home", href: "home" },
+  { name: "projects", href: "/projects" },
+];
 
 const NavMobile: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);

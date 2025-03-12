@@ -66,15 +66,19 @@ const ProjectDetailPage: React.FC = () => {
             <p className="font-body mt-4 text-accent text-xl font-medium">
               {project.category}
             </p>
-            <Image
-              src={`/assets/img/projects/${project.image}`}
-              alt={project.name}
-              height={200}
-              width={400}
-            />
+            <div className="my-16">
+              <Image
+                src={`/assets/img/projects/${project.image}`}
+                alt={project.name}
+                height={200}
+                width={400}
+                className="rounded-2xl"
+              />
+            </div>
+        
             {/* Tampilkan tombol hanya jika isDevelopement bukan true */}
             {!project.isDevelopement && (
-              <button className="btn btn-md bg-accent hover:bg-accent-hover md:btn-lg transition-all mt-10 mb-20">
+              <button className="btn btn-md bg-accent hover:bg-accent-hover md:btn-lg transition-all mb-14">
                 <a href={project.href}>Go to Website</a>
               </button>
             )}

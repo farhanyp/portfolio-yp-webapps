@@ -6,7 +6,7 @@ import { motion, Variants } from "framer-motion";
 import { Link } from "react-scroll";
 
 const navigation = [
-  { name: "home", href: "home" },
+  { name: "home", href: "/" },
   { name: "projects", href: "/projects" },
 ];
 

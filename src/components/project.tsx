@@ -4,7 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 
 export interface ProjectItem {
-  id: string;
+  _id?: string; // properti utama untuk identifikasi
   image: string;
   name: string;
   category: string;
@@ -14,16 +14,17 @@ export interface ProjectItem {
 
 interface ProjectProps {
   item: ProjectItem;
+  index?: number; // optional, digunakan untuk menghitung delay animasi
 }
 
-const Project: React.FC<ProjectProps> = ({ item }) => {
+const Project: React.FC<ProjectProps> = ({ item, index = 0 }) => {
   return (
     <motion.div
-      key={item.id}
+      key={item._id} 
       className="flex flex-col items-center text-center h-full"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: parseInt(item.id) * 0.1 }}
+      transition={{ duration: 0.8, delay: index * 0.1 }}
     >
       <h3 className="text-2xl font-semibold capitalize mb-3">{item.name}</h3>
       <p className="capitalize text-accent text-sm mb-3">{item.category}</p>
@@ -34,8 +35,11 @@ const Project: React.FC<ProjectProps> = ({ item }) => {
           alt={item.name}
         />
         <p className="text-justify flex-grow">{item.desc}</p>
-        <a href={item.href} className="py-2 px-4 bg-accent text-white rounded-lg">
-          Go to Website
+        <a
+          href={`/projects/${item._id}`}
+          className="py-2 px-4 bg-accent text-white rounded-lg"
+        >
+          See Detail
         </a>
       </div>
     </motion.div>

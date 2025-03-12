@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Project from "@/components/project";
 
 interface NavItem {
@@ -30,13 +31,15 @@ const Projects: React.FC = () => {
   const [projects, setProjects] = useState<ProjectItem[]>([]);
   const [active, setActive] = useState<number>(0);
   const [allProjects, setAllProjects] = useState<ProjectItem[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  // Ambil data proyek dari API, filter hanya yang pinned true, dan update URL gambar
+  // Ambil data proyek dari API menggunakan axios, filter hanya yang pinned true, dan update URL gambar
   useEffect(() => {
     const fetchProjects = async () => {
+      setLoading(true);
       try {
-        const response = await fetch("https://api-portfolio-blush.vercel.app/api/v1/projects");
-        const result = await response.json();
+        const response = await axios.get("https://api-portfolio-blush.vercel.app/api/v1/projects");
+        const result = response.data;
         // Filter hanya proyek dengan pinned bernilai true dan update URL gambar
         const pinnedProjects = result.data
           .filter((project: ProjectItem) => project.pinned === true)
@@ -48,6 +51,8 @@ const Projects: React.FC = () => {
         setProjects(pinnedProjects);
       } catch (error) {
         console.error("Error fetching projects:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -71,6 +76,22 @@ const Projects: React.FC = () => {
     setItem({ name: target.textContent?.toLowerCase() || "all" });
     setActive(index);
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center bg-primary">
+        <p className="text-white text-xl">Loading...</p>
+      </div>
+    );
+  }
+
+  if (!projects.length) {
+    return (
+      <div className="min-h-screen flex justify-center items-center bg-primary">
+        <p className="text-white text-xl">Project is not found</p>
+      </div>
+    );
+  }
 
   return (
     <div>

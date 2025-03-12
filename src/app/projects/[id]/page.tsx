@@ -1,55 +1,98 @@
-// src/app/projects/[id]/page.tsx
 "use client";
 
-import React from "react";
-import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
+import Image from "next/image";
 
-// Sample project data (replace with real data from props or API)
-const projectData = [
-  {
-    id: "1",
-    image: "/assets/img/testimonials/404.jpg",
-    name: "Prestige",
-    category: "Web Development",
-    href: "",
-    desc: "(Still Development). This application is a vehicle rental platform for luxury cars, yachts, helicopters, motorbike planes and even services like Uber.",
-  },
-  {
-    id: "2",
-    image: "/assets/img/projects/tixia.png",
-    name: "Tixia",
-    category: "Web Development",
-    href: "",
-    desc: "(Still Development). This app is a hotel booking and airplane ticket purchase service provider.",
-  },
-  {
-    id: "3",
-    image: "/assets/img/testimonials/404.jpg",
-    name: "Report Pegadaian",
-    category: "Web Development",
-    href: "",
-    desc: "(Still Development). This application is an internal pawnshop reporting tool.",
-  },
-];
+export interface ProjectItem {
+  _id?: string;
+  image: string;
+  name: string;
+  category: string;
+  href: string;
+  desc: string;
+}
 
 const ProjectDetailPage: React.FC = () => {
-  const router = useRouter();
-  const { id } = router.query; // Ambil id dari URL
+  const { id } = useParams(); // Ambil parameter id dari URL
+  const [project, setProject] = useState<ProjectItem | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  // Temukan data proyek berdasarkan ID
-  const project = projectData.find((project) => project.id === id);
+  useEffect(() => {
+    if (!id) return;
+    const fetchProject = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(
+          `https://api-portfolio-blush.vercel.app/api/v1/projects/${id}`
+        );
+        const result = await response.json();
+        // Asumsi respon API: { status_code, message, data: { ... } }
+        setProject(result.data);
+      } catch (error) {
+        console.error("Error fetching project:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProject();
+  }, [id]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   if (!project) {
     return <div>Project not found</div>;
   }
 
   return (
-    <div>
-      <h1>{project.name}</h1>
-      <img src={project.image} alt={project.name} />
-      <p>{project.desc}</p>
-      <a href={project.href}>Go to Website</a>
-    </div>
+    <>
+      <Header/>
+      <div>
+        <div className="bg-primary min-h-screen">
+          <div className="container mx-auto h-full py-32 flex flex-col items-center text-center">
+            <h1 className="font-body text-5xl">{project.name}</h1>
+            <p className="font-body mt-4 text-accent text-xl font-medium ">{project.category}</p>
+            <Image
+              src={`/assets/img/projects/${project.image}`}
+              alt={project.name}
+              height={200}
+              width={400}
+            />
+
+              <button className="btn btn-md bg-accent hover:bg-accent-hover md:btn-lg transition-all mt-10 mb-20">
+                  <a href={project.href}>
+                    Go to Website
+                  </a>
+              </button>
+            
+            <div className="flex flex-col md:flex-row gap-6">
+              <div className="flex-1 bg-secondary p-6 rounded-lg shadow-lg">
+                <h3 className="text-2xl font-bold text-accent mb-4 text-left">
+                  Description
+                </h3>
+                <p className="text-paragraph text-base leading-relaxed text-left max-w-lg">
+                  {project.desc}
+                </p>
+              </div>
+              <div className="flex-1 bg-secondary p-6 rounded-lg shadow-lg">
+                <h3 className="text-2xl font-bold text-accent mb-4 text-left">
+                  My participation in this project
+                </h3>
+                <p className="text-paragraph text-base leading-relaxed text-left max-w-lg">
+                  {project.desc}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Footer/>
+    </>
   );
 };
 

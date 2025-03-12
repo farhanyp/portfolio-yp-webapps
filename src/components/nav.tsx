@@ -1,7 +1,8 @@
 "use client";
 
-import React from 'react';
-import { Link } from 'react-scroll';
+import React from "react";
+import { Link as ScrollLink } from "react-scroll";
+import Link from "next/link";
 
 interface NavigationItem {
   href: string;
@@ -10,11 +11,7 @@ interface NavigationItem {
 
 const navigation: NavigationItem[] = [
   { name: "home", href: "home" },
-  { name: "about", href: "about" },
-  { name: "portfolio", href: "portfolio" },
-  { name: "services", href: "services" },
-  { name: "testimonials", href: "testimonials" },
-  { name: "contact", href: "contact" },
+  { name: "projects", href: "/projects" },
 ];
 
 const Nav: React.FC = () => {
@@ -23,17 +20,23 @@ const Nav: React.FC = () => {
       <ul className="flex space-x-8 capitalize text-[15px]">
         {navigation.map((item, index) => (
           <li key={index} className="text-white hover:text-accent cursor-pointer">
-            <Link
-              to={item.href}
-              activeClass="active"
-              spy={true}
-              smooth={true}
-              duration={500}
-              offset={-70}
-              className="transition-all duration-300"
-            >
-              {item.name}
-            </Link>
+            {item.href.startsWith("/") ? (
+              <Link href={item.href} className="transition-all duration-300">
+                {item.name}
+              </Link>
+            ) : (
+              <ScrollLink
+                to={item.href}
+                activeClass="active"
+                spy={true}
+                smooth={true}
+                duration={500}
+                offset={-70}
+                className="transition-all duration-300"
+              >
+                {item.name}
+              </ScrollLink>
+            )}
           </li>
         ))}
       </ul>

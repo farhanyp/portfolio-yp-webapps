@@ -23,10 +23,13 @@ const Portfolio: React.FC = () => {
           three projects that I recently worked on
           </p>
         </div>
-        <Projects />
         <Link href="/projects">
-          <p className="text-xl text-center hover:opacity-50 transition-all text-body underline">click here if you want see more.....</p>
+          <p className="text-lg text-right hover:opacity-50 transition-all text-blue-500 underline">
+            see all
+          </p>
         </Link>
+
+        <Projects />
       </div>
     </motion.section>
   );

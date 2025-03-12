@@ -13,7 +13,8 @@ export interface ProjectItem {
   category: string;
   href: string;
   desc: string;
-  isDevelopement?: boolean;
+  isDevelopment?: boolean;
+  isFakeProject?: boolean;
   contribution: string;
 }
 
@@ -59,8 +60,12 @@ const ProjectDetailPage: React.FC = () => {
           <div className="container mx-auto h-full py-32 flex flex-col items-center text-center">
             <h1 className="font-body text-5xl">
               {project.name}
-              {project.isDevelopement && (
+              {project.name}
+              {project.isDevelopment && (
                 <span className="text-lg text-red-500"> (Still Development)</span>
+              )}
+              {project.isFakeProject && (
+                <span className="text-lg text-red-500"> (Fake Project)</span>
               )}
             </h1>
             <p className="font-body mt-4 text-accent text-xl font-medium">
@@ -77,7 +82,7 @@ const ProjectDetailPage: React.FC = () => {
             </div>
         
             {/* Tampilkan tombol hanya jika isDevelopement bukan true */}
-            {!project.isDevelopement && (
+            {!project.isDevelopment && (
               <button className="btn btn-md bg-accent hover:bg-accent-hover md:btn-lg transition-all mb-14">
                 <a href={project.href}>Go to Website</a>
               </button>

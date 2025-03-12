@@ -10,7 +10,8 @@ export interface ProjectItem {
   category: string;
   href: string;
   desc: string;
-  isDevelopement?: boolean;
+  isDevelopment?: boolean;
+  isFakeProject?: boolean;
 }
 
 interface ProjectProps {
@@ -29,8 +30,11 @@ const Project: React.FC<ProjectProps> = ({ item, index = 0 }) => {
     >
       <h3 className="text-2xl font-semibold capitalize mb-3">
         {item.name}
-        {item.isDevelopement && (
+        {item.isDevelopment && (
           <span className="text-lg text-red-500"> (Still Development)</span>
+        )}
+        {item.isFakeProject && (
+          <span className="text-lg text-red-500"> (Fake Project)</span>
         )}
       </h3>
       <p className="capitalize text-accent text-sm mb-3">{item.category}</p>

@@ -10,6 +10,7 @@ export interface ProjectItem {
   category: string;
   href: string;
   desc: string;
+  isDevelopement?: boolean;
 }
 
 interface ProjectProps {
@@ -20,13 +21,18 @@ interface ProjectProps {
 const Project: React.FC<ProjectProps> = ({ item, index = 0 }) => {
   return (
     <motion.div
-      key={item._id} 
+      key={item._id}
       className="flex flex-col items-center text-center h-full"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: index * 0.1 }}
     >
-      <h3 className="text-2xl font-semibold capitalize mb-3">{item.name}</h3>
+      <h3 className="text-2xl font-semibold capitalize mb-3">
+        {item.name}
+        {item.isDevelopement && (
+          <span className="text-lg text-red-500"> (Still Development)</span>
+        )}
+      </h3>
       <p className="capitalize text-accent text-sm mb-3">{item.category}</p>
       <div className="mb-8 border-2 rounded-lg border-accent p-6 flex flex-col justify-between items-center gap-5 h-full">
         <img

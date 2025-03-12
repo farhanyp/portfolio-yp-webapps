@@ -13,6 +13,8 @@ export interface ProjectItem {
   category: string;
   href: string;
   desc: string;
+  isDevelopement?: boolean;
+  contribution: string;
 }
 
 const ProjectDetailPage: React.FC = () => {
@@ -51,25 +53,31 @@ const ProjectDetailPage: React.FC = () => {
 
   return (
     <>
-      <Header/>
+      <Header />
       <div>
         <div className="bg-primary min-h-screen">
           <div className="container mx-auto h-full py-32 flex flex-col items-center text-center">
-            <h1 className="font-body text-5xl">{project.name}</h1>
-            <p className="font-body mt-4 text-accent text-xl font-medium ">{project.category}</p>
+            <h1 className="font-body text-5xl">
+              {project.name}
+              {project.isDevelopement && (
+                <span className="text-lg text-red-500"> (Still Development)</span>
+              )}
+            </h1>
+            <p className="font-body mt-4 text-accent text-xl font-medium">
+              {project.category}
+            </p>
             <Image
               src={`/assets/img/projects/${project.image}`}
               alt={project.name}
               height={200}
               width={400}
             />
-
+            {/* Tampilkan tombol hanya jika isDevelopement bukan true */}
+            {!project.isDevelopement && (
               <button className="btn btn-md bg-accent hover:bg-accent-hover md:btn-lg transition-all mt-10 mb-20">
-                  <a href={project.href}>
-                    Go to Website
-                  </a>
+                <a href={project.href}>Go to Website</a>
               </button>
-            
+            )}
             <div className="flex flex-col md:flex-row gap-6">
               <div className="flex-1 bg-secondary p-6 rounded-lg shadow-lg">
                 <h3 className="text-2xl font-bold text-accent mb-4 text-left">
@@ -83,15 +91,19 @@ const ProjectDetailPage: React.FC = () => {
                 <h3 className="text-2xl font-bold text-accent mb-4 text-left">
                   My participation in this project
                 </h3>
-                <p className="text-paragraph text-base leading-relaxed text-left max-w-lg">
-                  {project.desc}
-                </p>
+                {project.contribution && (
+                  <ul className="list-disc list-inside text-paragraph text-base leading-relaxed text-left max-w-lg">
+                    {project.contribution.split(", ").map((item, index) => (
+                      <li key={index}>{item}</li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </div>
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

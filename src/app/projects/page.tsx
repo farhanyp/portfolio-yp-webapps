@@ -2,7 +2,7 @@
 
 import React from "react";
 import Header from "@/components/header";
-import Projects from "@/components/projects";
+import Projects from "@/components/list/projects";
 import Footer from "@/components/footer";
 
 const ProjectsPage: React.FC = () => {

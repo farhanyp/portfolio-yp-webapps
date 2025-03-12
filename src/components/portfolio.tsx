@@ -25,7 +25,7 @@ const Portfolio: React.FC = () => {
         </div>
         <Projects />
         <Link href="/projects">
-          <p className="text-xl text-center hover:opacity-50 transition-all text-body">click here if you want see more.....</p>
+          <p className="text-xl text-center hover:opacity-50 transition-all text-body underline">click here if you want see more.....</p>
         </Link>
       </div>
     </motion.section>

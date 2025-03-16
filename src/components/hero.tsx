@@ -25,7 +25,7 @@ const Hero: React.FC = () => {
               I'm a Backend Developer
             </h1>
             <p className="pt-4 pb-8 md:pt-6 md:pb-12 max-w-[480px] text-lg text-center">
-              I have 3 years of experience as a Backend Developer, specializing in Golang, Node.js, and Laravel.
+              <strong>Backend Developer</strong> with <strong>3+ years of experience</strong>, specializing in <strong>Golang</strong>, <strong>Node.js</strong>, and <strong>Laravel</strong>.
             </p>
             <button className="btn btn-md bg-accent hover:bg-accent-hover md:btn-lg transition-all">
                 <a href="/assets/CV_Farhan_Yudha_Pratama.pdf" download="CV_Farhan_Yudha_Pratama.pdf">

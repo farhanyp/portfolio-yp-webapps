@@ -60,7 +60,6 @@ const ProjectDetailPage: React.FC = () => {
           <div className="container mx-auto h-full py-32 flex flex-col items-center text-center">
             <h1 className="font-body text-5xl">
               {project.name}
-              {project.name}
               {project.isDevelopment && (
                 <span className="text-lg text-red-500"> (Still Development)</span>
               )}

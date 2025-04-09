@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { XMarkIcon, Bars3Icon } from "@heroicons/react/24/outline";
 import { motion, Variants } from "framer-motion";
-import { Link } from "react-scroll";
+import Link from "next/link";
 
 const navigation = [
   { name: "home", href: "/" },
@@ -65,13 +65,7 @@ const NavMobile: React.FC = () => {
         </div>
         {navigation.map((item, index) => (
           <li key={index} className="mb-8">
-            <Link
-              to={item.href}
-              smooth={true}
-              duration={500}
-              offset={-70}
-              className="text-xl cursor-pointer capitalize"
-            >
+            <Link href={item.href} className="text-xl cursor-pointer capitalize">
               {item.name}
             </Link>
           </li>

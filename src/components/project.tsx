@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export interface ProjectItem {
   _id?: string; // properti utama untuk identifikasi

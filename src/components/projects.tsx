@@ -16,7 +16,7 @@ export interface ProjectItem {
   category: string;
   href: string;
   desc: string;
-  pinned: boolean;
+  pinned: boolean;  
   __v?: number;
 }
 

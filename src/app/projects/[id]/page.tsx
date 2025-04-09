@@ -83,7 +83,7 @@ const ProjectDetailPage: React.FC = () => {
             {/* Tampilkan tombol hanya jika isDevelopement bukan true */}
             {!project.isDevelopment && (
               <button className="btn btn-md bg-accent hover:bg-accent-hover md:btn-lg transition-all mb-14">
-                <a href={project.href}>Go to Website</a>
+                <a target="_blank" rel="noopener noreferrer" href={project.href}>Go to Website</a>
               </button>
             )}
             <div className="flex flex-col md:flex-row gap-6">
